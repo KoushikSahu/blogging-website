@@ -1,13 +1,13 @@
 from rest_framework import serializers
 from rest_framework_jwt.settings import api_settings
 from django.contrib.auth.models import User
-
+from .models import BlogPost
 
 class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('username',)
+        fields = ('username', 'pk')
 
 
 class UserSerializerWithToken(serializers.ModelSerializer):
@@ -34,3 +34,9 @@ class UserSerializerWithToken(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('token', 'username', 'password')
+
+class PostSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = BlogPost
+        fields = '__all__'
