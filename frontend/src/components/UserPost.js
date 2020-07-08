@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { Container, Row } from 'react-bootstrap'
+import { Container, Row, Button } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 
 export class Posts extends Component {
     constructor(props) {
@@ -31,6 +32,11 @@ export class Posts extends Component {
         console.log(this.state.data)
         return (
             <Container>
+                <Row>
+                    <Button as={Link} to="/create-post" variant="primary">
+                        Create a post
+                    </Button>
+                </Row>
                 {
                     this.state.data.map((val, key)=>{
                         return (

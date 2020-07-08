@@ -5,6 +5,7 @@ import Login from './Login'
 import Posts from './Posts'
 import Signup from './Signup'
 import UserPost from './UserPost'
+import CreatePost from './CreatePost'
 
 function Root() {
     return (
@@ -17,6 +18,7 @@ function Root() {
                     <Route path='/login' component={Login} /> 
                     <Route path='/signup' component={Signup} />
                     <Route path='/user' component={UserPost} />
+                    <Route path='/create-post' component={CreatePost} />
                 </Switch>
             </Router>
         </div>
