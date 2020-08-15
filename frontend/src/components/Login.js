@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Form, Button, Container } from 'react-bootstrap'
+import './form-style.css'
 
 export class Login extends Component {
     constructor(props) {
@@ -15,7 +16,7 @@ export class Login extends Component {
 
     handleLogin(e){
         e.preventDefault();
-        fetch('http://127.0.0.1:8001/api/auth-token/', {
+        fetch('http://127.0.0.1:8000/api/auth-token/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -39,7 +40,7 @@ export class Login extends Component {
 
         return (
             <div>
-                <Container>
+                <Container className="form-style">
                     <Form onSubmit={this.handleLogin}>
                         <Form.Group>
                             <Form.Label>Username</Form.Label>

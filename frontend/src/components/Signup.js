@@ -15,7 +15,7 @@ export class Signup extends Component {
     
     handleSignup(e){
         e.preventDefault()
-        fetch('http://localhost:8001/api/users/', {
+        fetch('http://localhost:8000/api/users/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

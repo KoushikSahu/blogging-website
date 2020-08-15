@@ -13,7 +13,7 @@ export class NavigationBar extends Component {
 
     componentDidMount() {
         if(this.state.logged_in){
-            fetch('http://localhost:8001/api/current_user/', {
+            fetch('http://localhost:8000/api/current_user/', {
                 headers: {
                     'Authorization': `JWT ${localStorage.getItem('token')}`
                 }

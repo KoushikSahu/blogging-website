@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Container, Row } from 'react-bootstrap'
+import './posts-style.css'
 
 export class Posts extends Component {
     constructor(props) {
@@ -11,7 +12,7 @@ export class Posts extends Component {
     }
 
     componentDidMount(){
-        fetch('http://127.0.0.1:8001/api/posts/'
+        fetch('http://127.0.0.1:8000/api/posts/'
         ).then(res=>res.json())
         .then(json=>{
             this.setState(
@@ -30,12 +31,13 @@ export class Posts extends Component {
                     this.state.data.map((val, key)=>{
                         return (
                             <Container>
-                                <Row>
+                                <Row className="posttitle">
                                     {val.title}
                                 </Row>
-                                <Row>
+                                <Row className="posttext">
                                     {val.post}
                                 </Row>
+                                <hr />
                             </Container>
                         )
                     })   

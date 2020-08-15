@@ -6,6 +6,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from .serializers import UserSerializer, UserSerializerWithToken, PostSerializer
 from .models import BlogPost
+import json
 
 @api_view(['GET'])
 def current_user(request):
@@ -34,17 +35,30 @@ class AllPostList(APIView):
 
     def post(self, request):
         print(request.data)
-        serializer = PostSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-        return Response(serializer.data)
+        queryset = BlogPost.objects.get(pk=request.data['key'])
+        queryset.delete()
+        return Response('Deleted post')
 
-@api_view(['GET'])
+@api_view(['GET', 'POST'])
 def UserAllPosts(request):
-    if isinstance(request.user, AnonymousUser):
-        return Response('Error', status=Http404)
-    else:
-        usr_name = str(request.user.username)
-        querylist = BlogPost.objects.filter(author__username=usr_name)
-        serializer = PostSerializer(querylist, many=True)
-        return Response(serializer.data)
+
+    if request.method == "GET":
+        if isinstance(request.user, AnonymousUser):
+            return Response('Error', status=Http404)
+        else:
+            usr_name = str(request.user.username)
+            querylist = BlogPost.objects.filter(author__username=usr_name)
+            serializer = PostSerializer(querylist, many=True)
+            return Response(serializer.data)
+
+    elif request.method == "POST":
+        if isinstance(request.user, AnonymousUser):
+            return Response('Error', status=Http404)
+        else:
+            post_data = request.data
+            post_data['author'] = request.user.pk
+            serializer = PostSerializer(data=post_data)
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data)
+            return Response('Error... Invalid data!')

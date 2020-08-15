@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { Form, Button } from 'react-bootstrap'
+import { Form, Button, Container } from 'react-bootstrap'
+import './form-style.css'
 
 export class CreatePost extends Component {
     constructor(props) {
@@ -17,7 +18,7 @@ export class CreatePost extends Component {
     
     submitHandler(e){
         e.preventDefault()
-        fetch('http://127.0.0.1:8001/api/user-post/', {
+        fetch('http://127.0.0.1:8000/api/user-post/', {
             method: 'POST',
             headers: {
                 'Authorization': `JWT ${localStorage.getItem('token')}`,
@@ -51,7 +52,7 @@ export class CreatePost extends Component {
         console.log(this.state)
 
         return (
-            <div>
+            <Container className="form-style">
                 <Form onSubmit={this.submitHandler}>
                     <Form.Group>
                         <Form.Label>
@@ -69,7 +70,7 @@ export class CreatePost extends Component {
                         <Button variant="primary" type="submit">Create post!</Button>
                     </Form.Group>
                 </Form>             
-            </div>
+            </Container>
         )
     }
 }
