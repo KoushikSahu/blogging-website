@@ -1,0 +1,17 @@
+.intro-text::after {
+  content: ' ';
+  animation: change-text ease-in-out infinite 4s;
+  font-style: italic;
+}
+
+@keyframes change-text {
+  0% {
+    content: ' ideas'
+  }
+  50% {
+    content: ' knowledge'
+  }
+  100% {
+    content: ' opinions'
+  }
+}
